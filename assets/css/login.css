@@ -4,7 +4,7 @@ body, html {
     padding: 0;
     height: 100%;
     font-family: 'Arial', sans-serif;
-    background-image: url('../images/SIMGEs.png'); /* Certifique-se de que o caminho está correto */
+    background-image: url('../images/login.png'); /* Certifique-se de que o caminho está correto */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
