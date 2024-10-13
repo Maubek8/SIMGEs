@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- Incluindo o arquivo CSS -->
-    <link rel="stylesheet" href="styles/login.css">
+    <link rel="stylesheet" href="assets/css/login.css">
 </head>
 <body>
     <!-- Conteúdo da página de login -->
@@ -49,7 +49,30 @@
         <div class="modal-content">
             <span class="close">&times;</span>
             <h2>Registro</h2>
-            <!-- Formulário de Registro -->
+            <form id="registerForm">
+                <div class="form-group">
+                    <label for="fullName">Nome Completo:</label>
+                    <input type="text" id="fullName" name="fullName" required>
+                </div>
+                <div class="form-group">
+                    <label for="birthDate">Data de Nascimento:</label>
+                    <input type="date" id="birthDate" name="birthDate" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="newPassword">Senha:</label>
+                    <input type="password" id="newPassword" name="newPassword" required>
+                    <div id="passwordStrength" class="password-strength"></div>
+                </div>
+                <div class="form-group">
+                    <label for="confirmPassword">Confirmar Senha:</label>
+                    <input type="password" id="confirmPassword" name="confirmPassword" required>
+                </div>
+                <button type="submit">Cadastrar</button>
+            </form>
         </div>
     </div>
 
@@ -57,11 +80,17 @@
         <div class="modal-content">
             <span class="close">&times;</span>
             <h2>Esqueci a Senha</h2>
-            <!-- Formulário de Recuperação de Senha -->
+            <form id="forgotPasswordForm">
+                <div class="form-group">
+                    <label for="recoveryEmail">Email de Cadastro:</label>
+                    <input type="email" id="recoveryEmail" name="recoveryEmail" required>
+                </div>
+                <button type="submit">Enviar Link de Recuperação</button>
+            </form>
         </div>
     </div>
 
     <!-- Incluindo o arquivo JavaScript -->
-    <script src="scripts/login.js"></script>
+    <script src="assets/js/login.js"></script>
 </body>
 </html>
