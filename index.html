@@ -3,76 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SIMGEs - Sistema Integrado de Gestão</title>
+    <title>Login - SIMGEs</title>
     <style>
         body, html {
-            margin: 0;
-            padding: 0;
             height: 100%;
-            font-family: 'Arial', sans-serif;
-            background-image: url('assets/image/login.png'); /* Verifique o caminho da imagem */
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-image: url('assets/image/login.png');
             background-size: cover;
             background-position: center;
-            background-repeat: no-repeat;
-        }
-        .container {
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-        }
-        .header {
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-            padding: 20px;
-            background-color: rgba(44, 62, 80, 0.7);
-        }
-        .logo {
-            color: white;
-            text-align: right;
-        }
-        .logo h1 {
-            margin: 0;
-            font-size: 24px;
-        }
-        .logo p {
-            margin: 0;
-            font-size: 14px;
-        }
-        .content {
-            flex-grow: 1;
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-            padding: 20px;
         }
         .auth-box {
-            background-color: rgba(255, 255, 255, 0.9);
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            padding: 40px;
             width: 300px;
-            margin-right: 10%;
-            position: relative;
+            margin: 100px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
-        h2 {
-            margin-top: 0;
-            color: #2c3e50;
-        }
-        .form-group {
-            margin-bottom: 20px;
-        }
-        label {
-            display: block;
-            margin-bottom: 5px;
-            color: #34495e;
-        }
-        input[type="text"], input[type="password"], input[type="email"], input[type="date"] {
+        input[type="text"], input[type="password"] {
             width: 100%;
             padding: 10px;
+            margin: 10px 0;
             border: 1px solid #ddd;
             border-radius: 4px;
-            font-size: 16px;
         }
         button {
             width: 100%;
@@ -81,216 +35,39 @@
             color: white;
             border: none;
             border-radius: 4px;
-            font-size: 16px;
             cursor: pointer;
-            transition: background-color 0.3s;
         }
         button:hover {
             background-color: #2980b9;
         }
-        .footer {
-            background-color: rgba(52, 73, 94, 0.7);
-            color: white;
-            text-align: center;
-            padding: 10px;
-            font-size: 14px;
-        }
-        .auth-links {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 15px;
-            font-size: 14px;
-        }
-        .auth-links a {
-            color: #3498db;
-            text-decoration: none;
-            cursor: pointer;
-        }
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0,0,0,0.4);
-        }
-        .modal-content {
-            background-color: #fefefe;
-            margin: 15% auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 80%;
-            max-width: 500px;
-        }
-        .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-        }
-        .close:hover,
-        .close:focus {
-            color: black;
-            text-decoration: none;
-            cursor: pointer;
-        }
-        .password-strength {
-            font-size: 12px;
-            margin-top: 5px;
-        }
-        .weak { color: red; }
-        .medium { color: orange; }
-        .strong { color: green; }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header class="header">
-            <div class="logo">
-                <h1>SIMGEs - SimLab</h1>
-                <p>Powered by MK</p>
-            </div>
-        </header>
-        
-        <main class="content">
-            <div class="auth-box">
-                <h2>Login</h2>
-                <form id="loginForm">
-                    <div class="form-group">
-                        <label for="username">Usuário:</label>
-                        <input type="text" id="username" name="username" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="password">Senha:</label>
-                        <input type="password" id="password" name="password" required>
-                    </div>
-                    <button type="submit">Entrar</button>
-                </form>
-                <div class="auth-links">
-                    <a id="registerLink">Registrar</a>
-                    <a id="forgotPasswordLink">Esqueci a senha</a>
-                </div>
-            </div>
-        </main>
-        
-        <footer class="footer">
-            &copy; 2024 SIMGEs - Todos os direitos reservados
-        </footer>
+    <div class="auth-box">
+        <h2>Login</h2>
+        <form id="loginForm">
+            <label for="username">Usuário:</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="password">Senha:</label>
+            <input type="password" id="password" name="password" required>
+
+            <button type="submit">Entrar</button>
+        </form>
     </div>
 
-    <!-- Modal de Registro -->
-    <div id="registerModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2>Registrar</h2>
-            <form id="registerForm">
-                <div class="form-group">
-                    <label for="fullName">Nome Completo:</label>
-                    <input type="text" id="fullName" name="fullName" required>
-                </div>
-                <div class="form-group">
-                    <label for="birthDate">Data de Nascimento:</label>
-                    <input type="date" id="birthDate" name="birthDate" required>
-                </div>
-                <div class="form-group">
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" required>
-                </div>
-                <div class="form-group">
-                    <label for="newPassword">Senha:</label>
-                    <input type="password" id="newPassword" name="newPassword" required>
-                    <div id="passwordStrength" class="password-strength"></div>
-                </div>
-                <div class="form-group">
-                    <label for="confirmPassword">Confirmar Senha:</label>
-                    <input type="password" id="confirmPassword" name="confirmPassword" required>
-                </div>
-                <button type="submit">Cadastrar</button>
-            </form>
-        </div>
-    </div>
-
-    <!-- Modal Esqueci a Senha -->
-    <div id="forgotPasswordModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2>Esqueci a Senha</h2>
-            <form id="forgotPasswordForm">
-                <div class="form-group">
-                    <label for="recoveryEmail">Email de Cadastro:</label>
-                    <input type="email" id="recoveryEmail" name="recoveryEmail" required>
-                </div>
-                <button type="submit">Enviar Link de Recuperação</button>
-            </form>
-        </div>
-    </div>
-
-    <!-- Scripts JavaScript -->
     <script>
-        const registerModal = document.getElementById("registerModal");
-        const forgotPasswordModal = document.getElementById("forgotPasswordModal");
-        const registerLink = document.getElementById("registerLink");
-        const forgotPasswordLink = document.getElementById("forgotPasswordLink");
-        const closeButtons = document.getElementsByClassName("close");
-        const passwordInput = document.getElementById("newPassword");
-        const passwordStrength = document.getElementById("passwordStrength");
-        const confirmPasswordInput = document.getElementById("confirmPassword");
+        document.getElementById("loginForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            const username = document.getElementById("username").value;
 
-        registerLink.onclick = function() {
-            registerModal.style.display = "block";
-        }
-
-        forgotPasswordLink.onclick = function() {
-            forgotPasswordModal.style.display = "block";
-        }
-
-        Array.from(closeButtons).forEach(function(closeButton) {
-            closeButton.onclick = function() {
-                registerModal.style.display = "none";
-                forgotPasswordModal.style.display = "none";
-            }
-        });
-
-        window.onclick = function(event) {
-            if (event.target == registerModal) {
-                registerModal.style.display = "none";
-            }
-            if (event.target == forgotPasswordModal) {
-                forgotPasswordModal.style.display = "none";
-            }
-        }
-
-                function checkPasswordStrength(password) {
-            let strength = 0;
-            if (password.length >= 6) strength++;
-            if (password.match(/[a-z]+/)) strength++;
-            if (password.match(/[A-Z]+/)) strength++;
-            if (password.match(/[0-9]+/)) strength++;
-            
-            if (strength < 2) {
-                passwordStrength.textContent = 'Fraca';
-                passwordStrength.className = 'weak';
-            } else if (strength == 2) {
-                passwordStrength.textContent = 'Média';
-                passwordStrength.className = 'medium';
+            if (username) {
+                // Armazena o nome do usuário na sessionStorage
+                sessionStorage.setItem("username", username);
+                // Redireciona para o dashboard
+                window.location.href = "dashboard.html";
             } else {
-                passwordStrength.textContent = 'Forte';
-                passwordStrength.className = 'strong';
-            }
-        }
-
-        passwordInput.addEventListener('input', function() {
-            checkPasswordStrength(passwordInput.value);
-        });
-
-        confirmPasswordInput.addEventListener('input', function() {
-            if (passwordInput.value !== confirmPasswordInput.value) {
-                confirmPasswordInput.setCustomValidity("Senhas não correspondem");
-            } else {
-                confirmPasswordInput.setCustomValidity("");
+                alert("Por favor, insira um nome de usuário válido.");
             }
         });
     </script>
