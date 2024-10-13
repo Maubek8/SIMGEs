@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <base href="https://simges.edu/">
+    <title>SIMGEs - Sistema Integrado de Gestão de Simulação</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Incluindo o arquivo CSS -->
+    <link rel="stylesheet" href="styles/login.css">
+</head>
+<body>
+    <!-- Conteúdo da página de login -->
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <h1>SIMGEs - SimLab</h1>
+                <p>Powered by MK</p>
+            </div>
+        </header>
+
+        <main class="content">
+            <div class="auth-box">
+                <h2>Login</h2>
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="username">Usuário:</label>
+                        <input type="text" id="username" name="username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Senha:</label>
+                        <input type="password" id="password" name="password" required>
+                    </div>
+                    <button type="submit">Entrar</button>
+                </form>
+                <div class="auth-links">
+                    <a id="registerLink">Registrar</a>
+                    <a id="forgotPasswordLink">Esqueci a senha</a>
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            &copy; 2024 SIMGEs - Todos os direitos reservados
+        </footer>
+    </div>
+
+    <!-- Modal de Registro e Recuperação de Senha -->
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Registro</h2>
+            <!-- Formulário de Registro -->
+        </div>
+    </div>
+
+    <div id="forgotPasswordModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Esqueci a Senha</h2>
+            <!-- Formulário de Recuperação de Senha -->
+        </div>
+    </div>
+
+    <!-- Incluindo o arquivo JavaScript -->
+    <script src="scripts/login.js"></script>
+</body>
+</html>
