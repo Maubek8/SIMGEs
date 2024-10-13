@@ -1,21 +1,19 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <base href="https://simges.edu/">
-    <title>SIMGEs - Sistema Integrado de Gestão de Simulação</title>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- Incluindo o arquivo CSS -->
+    <title>SIMGEs - Sistema Integrado de Gestão</title>
+
+    <!-- Link para o arquivo CSS -->
     <link rel="stylesheet" href="assets/css/login.css">
 </head>
 <body>
-    <!-- Conteúdo da página de login -->
+
+    <!-- Container Principal -->
     <div class="container">
         <header class="header">
-            <div class="logo">
-                <h1>SIMGEs - SimLab</h1>
-                <p>Powered by MK</p>
-            </div>
+            <h1>SIMGEs - Sistema Integrado de Gestão de Simulação</h1>
         </header>
 
         <main class="content">
@@ -44,38 +42,31 @@
         </footer>
     </div>
 
-    <!-- Modal de Registro e Recuperação de Senha -->
+    <!-- Modal de Registro -->
     <div id="registerModal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
-            <h2>Registro</h2>
+            <h2>Registrar</h2>
             <form id="registerForm">
                 <div class="form-group">
                     <label for="fullName">Nome Completo:</label>
                     <input type="text" id="fullName" name="fullName" required>
                 </div>
                 <div class="form-group">
-                    <label for="birthDate">Data de Nascimento:</label>
-                    <input type="date" id="birthDate" name="birthDate" required>
-                </div>
-                <div class="form-group">
                     <label for="email">Email:</label>
                     <input type="email" id="email" name="email" required>
                 </div>
                 <div class="form-group">
-                    <label for="newPassword">Senha:</label>
+                    <label for="password">Senha:</label>
                     <input type="password" id="newPassword" name="newPassword" required>
                     <div id="passwordStrength" class="password-strength"></div>
-                </div>
-                <div class="form-group">
-                    <label for="confirmPassword">Confirmar Senha:</label>
-                    <input type="password" id="confirmPassword" name="confirmPassword" required>
                 </div>
                 <button type="submit">Cadastrar</button>
             </form>
         </div>
     </div>
 
+    <!-- Modal Esqueci a Senha -->
     <div id="forgotPasswordModal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
@@ -90,7 +81,8 @@
         </div>
     </div>
 
-    <!-- Incluindo o arquivo JavaScript -->
+    <!-- Scripts JavaScript -->
     <script src="assets/js/login.js"></script>
+
 </body>
 </html>
