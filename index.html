@@ -10,7 +10,7 @@
             padding: 0;
             height: 100%;
             font-family: 'Arial', sans-serif;
-            background-image: url('login.png');
+            background-image: url('/login.png');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -211,7 +211,7 @@
             </form>
         </div>
     </div>
-    <!-- Scripts JavaScript -->
+       <!-- Scripts JavaScript -->
     <script>
         const registerModal = document.getElementById("registerModal");
         const forgotPasswordModal = document.getElementById("forgotPasswordModal");
@@ -224,11 +224,13 @@
 
         // Exibir modal de registro
         registerLink.onclick = function() {
+            console.log("Registrar clicado!");
             registerModal.style.display = "block";
         }
 
         // Exibir modal de recuperação de senha
         forgotPasswordLink.onclick = function() {
+            console.log("Esqueci a senha clicado!");
             forgotPasswordModal.style.display = "block";
         }
 
@@ -288,6 +290,7 @@
         // Envio do formulário de recuperação de senha
         document.getElementById("forgotPasswordForm").addEventListener("submit", function(event) {
             event.preventDefault();
+            console.log("Formulário de recuperação enviado!");
             alert("Link de recuperação enviado para o email informado.");
             forgotPasswordModal.style.display = "none";
         });
@@ -296,9 +299,11 @@
         document.getElementById("registerForm").addEventListener("submit", function(event) {
             event.preventDefault();
             if (passwordInput.value === confirmPasswordInput.value) {
+                console.log("Registro realizado com sucesso!");
                 alert("Registro realizado com sucesso!");
                 registerModal.style.display = "none";
             } else {
+                console.log("As senhas não correspondem.");
                 alert("As senhas não correspondem!");
             }
         });
