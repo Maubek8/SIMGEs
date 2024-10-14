@@ -1,52 +1,99 @@
 const express = require('express');
+const path = require('path');
 const bodyParser = require('body-parser');
-const sendGrid = require('@sendgrid/mail');
-const dotenv = require('dotenv');
-
-// Carregar variáveis de ambiente do arquivo .env
-dotenv.config();
-
-// Configurar a chave da API do SendGrid
-sendGrid.setApiKey(process.env.SENDGRID_API_KEY);
+const { Pool } = require('pg');
+const sgMail = require('@sendgrid/mail');
+require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Configurar bodyParser para receber dados de formulários
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+// Configuração do SendGrid
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
-// Rota para o formulário de registro
-app.post('/register', (req, res) => {
-    const { fullName, email, newPassword } = req.body;
-
-    const message = {
-        to: email,
-        from: 'noreply@simges.com', // Substitua por seu endereço de e-mail de envio
-        subject: 'Confirmação de Cadastro no SIMGEs',
-        text: `Olá, ${fullName}! Obrigado por se registrar no SIMGEs.`,
-        html: `<strong>Olá, ${fullName}!</strong><br>Obrigado por se registrar no SIMGEs. Sua conta foi criada com sucesso.`,
-    };
-
-    // Enviar e-mail usando SendGrid
-    sendGrid
-        .send(message)
-        .then(() => {
-            console.log('E-mail de confirmação enviado com sucesso.');
-            res.status(200).send('Registro concluído! Verifique seu e-mail para confirmar.');
-        })
-        .catch((error) => {
-            console.error('Erro ao enviar o e-mail:', error);
-            res.status(500).send('Erro ao enviar e-mail de confirmação.');
-        });
+// Conexão com o PostgreSQL
+const pool = new Pool({
+  user: 'simlab_user',
+  host: 'dpg-cs6m685svqrc73dn32fg-a',
+  database: 'simlab',
+  password: process.env.DB_PASSWORD,
+  port: 5432,
 });
 
-// Servir a página HTML
+// Middleware
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname)));
+
+// Verifica se o usuário é administrador
+const isAdmin = (req, res, next) => {
+  const userRole = req.body.role || 'user'; // Exemplo de como verificar o papel do usuário
+  if (userRole === 'admin') {
+    next();
+  } else {
+    res.status(403).send('Acesso negado');
+  }
+};
+
+// Página de login
 app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/index.html');
+  res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-// Iniciar o servidor
+// Rota para o dashboard (somente admin vê "Usuários")
+app.get('/dashboard', (req, res) => {
+  const isAdminUser = req.query.admin === 'true'; // Verifica a permissão no query string
+  res.sendFile(path.join(__dirname, 'dashboard.html'), (err) => {
+    if (err) {
+      res.status(500).send('Erro ao carregar o dashboard');
+    } else {
+      console.log(`Acesso ao dashboard, admin: ${isAdminUser}`);
+    }
+  });
+});
+
+// Rota para registrar usuários
+app.post('/register', (req, res) => {
+  const { fullName, birthDate, email, password } = req.body;
+
+  // Lógica para armazenar no banco de dados
+  pool.query(
+    'INSERT INTO users (name, birthdate, email, password) VALUES ($1, $2, $3, $4)',
+    [fullName, birthDate, email, password],
+    (err, result) => {
+      if (err) {
+        console.error('Erro ao registrar o usuário', err);
+        res.status(500).send('Erro ao registrar');
+      } else {
+        res.status(200).send('Usuário registrado com sucesso');
+      }
+    }
+  );
+});
+
+// Rota para enviar link de recuperação de senha
+app.post('/forgot-password', (req, res) => {
+  const { email } = req.body;
+
+  const msg = {
+    to: email,
+    from: process.env.SENDGRID_SENDER_EMAIL,
+    subject: 'Recuperação de Senha',
+    text: 'Clique no link abaixo para redefinir sua senha:',
+    html: '<strong>Clique no link abaixo para redefinir sua senha:</strong>',
+  };
+
+  sgMail
+    .send(msg)
+    .then(() => {
+      res.status(200).send('E-mail de recuperação enviado');
+    })
+    .catch((error) => {
+      console.error('Erro ao enviar e-mail', error);
+      res.status(500).send('Erro ao enviar e-mail');
+    });
+});
+
+// Iniciar servidor
 app.listen(PORT, () => {
-    console.log(`Servidor rodando na porta ${PORT}`);
+  console.log(`Servidor rodando na porta ${PORT}`);
 });
