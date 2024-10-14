@@ -211,22 +211,6 @@
             </form>
         </div>
     </div>
-
-    <!-- Modal Esqueci a Senha -->
-    <div id="forgotPasswordModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2>Esqueci a Senha</h2>
-            <form id="forgotPasswordForm">
-                <div class="form-group">
-                    <label for="recoveryEmail">Email de Cadastro:</label>
-                    <input type="email" id="recoveryEmail" name="recoveryEmail" required>
-                </div>
-                <button type="submit">Enviar Link de Recuperação</button>
-            </form>
-        </div>
-    </div>
-
     <!-- Scripts JavaScript -->
     <script>
         const registerModal = document.getElementById("registerModal");
@@ -238,14 +222,17 @@
         const passwordStrength = document.getElementById("passwordStrength");
         const confirmPasswordInput = document.getElementById("confirmPassword");
 
+        // Exibir modal de registro
         registerLink.onclick = function() {
             registerModal.style.display = "block";
         }
 
+        // Exibir modal de recuperação de senha
         forgotPasswordLink.onclick = function() {
             forgotPasswordModal.style.display = "block";
         }
 
+        // Fechar modais
         Array.from(closeButtons).forEach(function(closeButton) {
             closeButton.onclick = function() {
                 registerModal.style.display = "none";
@@ -253,6 +240,7 @@
             }
         });
 
+        // Fechar modais ao clicar fora
         window.onclick = function(event) {
             if (event.target == registerModal) {
                 registerModal.style.display = "none";
@@ -262,34 +250,58 @@
             }
         }
 
-     function checkPasswordStrength(password) {
-    let strength = 0;
-    if (password.length >= 6) strength++;
-    if (password.match(/[a-z]+/)) strength++;
-    if (password.match(/[A-Z]+/)) strength++;
-    if (password.match(/[0-9]+/)) strength++;
-    if (password.match(/[\W]+/)) strength++; // Para caracteres especiais
+        // Verificação da força da senha
+        function checkPasswordStrength(password) {
+            let strength = 0;
+            if (password.length >= 6) strength++;
+            if (password.match(/[a-z]+/)) strength++;
+            if (password.match(/[A-Z]+/)) strength++;
+            if (password.match(/[0-9]+/)) strength++;
+            if (password.match(/[\W]+/)) strength++; // Verifica caracteres especiais
 
-    if (strength < 2) {
-        passwordStrength.textContent = 'Fraca';
-        passwordStrength.className = 'weak';
-    } else if (strength == 2) {
-        passwordStrength.textContent = 'Média';
-        passwordStrength.className = 'medium';
-    } else {
-        passwordStrength.textContent = 'Forte';
-        passwordStrength.className = 'strong';
-    }
-}
+            if (strength < 2) {
+                passwordStrength.textContent = 'Fraca';
+                passwordStrength.className = 'weak';
+            } else if (strength == 2) {
+                passwordStrength.textContent = 'Média';
+                passwordStrength.className = 'medium';
+            } else {
+                passwordStrength.textContent = 'Forte';
+                passwordStrength.className = 'strong';
+            }
+        }
 
-passwordInput.addEventListener('input', function() {
-    checkPasswordStrength(passwordInput.value);
-});
+        // Atualizar a força da senha enquanto o usuário digita
+        passwordInput.addEventListener('input', function() {
+            checkPasswordStrength(passwordInput.value);
+        });
 
-confirmPasswordInput.addEventListener('input', function() {
-    if (passwordInput.value !== confirmPasswordInput.value) {
-        confirmPasswordInput.setCustomValidity("Senhas não correspondem");
-    } else {
-        confirmPasswordInput.setCustomValidity("");
-    }
-});
+        // Verificar correspondência de senhas
+        confirmPasswordInput.addEventListener('input', function() {
+            if (passwordInput.value !== confirmPasswordInput.value) {
+                confirmPasswordInput.setCustomValidity("Senhas não correspondem");
+            } else {
+                confirmPasswordInput.setCustomValidity("");
+            }
+        });
+
+        // Envio do formulário de recuperação de senha
+        document.getElementById("forgotPasswordForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            alert("Link de recuperação enviado para o email informado.");
+            forgotPasswordModal.style.display = "none";
+        });
+
+        // Envio do formulário de registro
+        document.getElementById("registerForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            if (passwordInput.value === confirmPasswordInput.value) {
+                alert("Registro realizado com sucesso!");
+                registerModal.style.display = "none";
+            } else {
+                alert("As senhas não correspondem!");
+            }
+        });
+    </script>
+</body>
+</html>
