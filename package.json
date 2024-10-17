@@ -1,9 +1,29 @@
 {
+  "name": "seu-projeto",
+  "version": "1.0.0",
+  "description": "Projeto de gerenciamento de simulação realística",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
   "dependencies": {
-    "@sendgrid/mail": "^8.1.3",
-    "dotenv": "^16.4.5",
-    "express": "^4.21.1",
-    "face-api.js": "^0.20.0",
-    "pg": "^8.13.0"
-  }
+    "@tensorflow/tfjs": "^4.0.0",
+    "face-api.js": "^0.22.0",
+    "express": "^4.17.3",
+    "body-parser": "^1.19.0",
+    "mongoose": "^6.0.0",
+    "node-fetch": "^2.6.7"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  },
+  "resolutions": {
+    "node-fetch": "^2.6.7"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "author": "Seu Nome",
+  "license": "ISC"
 }
